@@ -16,7 +16,9 @@ services:
     image: redis:alpine
 
   frappe:
-    image: frappe/bench:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frappe
     command: bash /workspace/init.sh
     environment:
       - SHELL=/bin/bash
@@ -24,8 +26,8 @@ services:
     volumes:
       - .:/workspace
     ports:
-      - 8000:8000
-      - 9000:9000
+      - ${FRAPPE_PORT_1:-8000}:8000
+      - ${FRAPPE_PORT_2:-9000}:9000
 
 volumes:
   mariadb-data:

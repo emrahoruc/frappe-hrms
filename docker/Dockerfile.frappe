@@ -1,0 +1,4 @@
+FROM frappe/bench:latest
+
+# Copy init script to container
+COPY docker/init.sh /workspace/init.sh
